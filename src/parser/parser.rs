@@ -292,6 +292,8 @@ impl<'a> ExpressionParser for Parser<'a> {
         // being redefined/subsetted in the standard library (SysML.sysml).
         // Also "predicate", "interaction", "metaclass", "member" which appear as feature names.
         // Also "var" which is used as a feature name in Actions.sysml (assign var := ...)
+        // Also "state" which is not a reserved keyword per KerML spec §8.2.2.6 and is valid
+        // as a plain identifier in feature declarations (e.g. `out item state : T`).
         matches!(
             self.current_kind(),
             SyntaxKind::IDENT
@@ -316,6 +318,7 @@ impl<'a> ExpressionParser for Parser<'a> {
                 | SyntaxKind::METACLASS_KW
                 | SyntaxKind::MEMBER_KW
                 | SyntaxKind::VAR_KW
+                | SyntaxKind::STATE_KW
         )
     }
 
