@@ -76,12 +76,11 @@ fn load_directory_into_index(dir: &Path) -> (SymbolIndex, Vec<(FileId, PathBuf)>
     (index, file_info)
 }
 
+type ErrorList = Vec<(PathBuf, Diagnostic)>;
+
 /// Get all semantic errors (excluding warnings) for all files in an index.
 /// Returns `(all_errors, new_errors)` where `new_errors` excludes known false positives.
-fn get_all_errors(
-    index: &SymbolIndex,
-    file_info: &[(FileId, PathBuf)],
-) -> (Vec<(PathBuf, Diagnostic)>, Vec<(PathBuf, Diagnostic)>) {
+fn get_all_errors(index: &SymbolIndex, file_info: &[(FileId, PathBuf)]) -> (ErrorList, ErrorList) {
     let mut all_errors = Vec::new();
     let mut new_errors = Vec::new();
 
