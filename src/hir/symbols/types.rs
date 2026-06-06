@@ -168,6 +168,7 @@ pub(crate) enum InternalUsageKind {
     Viewpoint,
     Rendering,
     Feature,
+    Succession,
     Other,
 }
 
@@ -679,6 +680,7 @@ pub enum SymbolKind {
     AnalysisCaseUsage,
     VerificationCaseUsage,
     FlowConnectionUsage,
+    SuccessionUsage,
     // Relationships
     ExposeRelationship,
     // Other
@@ -770,6 +772,7 @@ impl SymbolKind {
             InternalUsageKind::Viewpoint => Self::ViewpointUsage,
             InternalUsageKind::Rendering => Self::RenderingUsage,
             InternalUsageKind::Feature => Self::AttributeUsage,
+            InternalUsageKind::Succession => Self::SuccessionUsage,
             InternalUsageKind::Other => Self::Other,
         }
     }
@@ -835,6 +838,7 @@ impl SymbolKind {
             Self::AnalysisCaseUsage => "Analysis",
             Self::VerificationCaseUsage => "Verification",
             Self::FlowConnectionUsage => "Flow",
+            Self::SuccessionUsage => "Succession",
             Self::ExposeRelationship => "Expose",
             Self::Import => "Import",
             Self::Alias => "Alias",
