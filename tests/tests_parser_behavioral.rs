@@ -115,3 +115,17 @@ fn test_comments_parse(#[case] input: &str) {
 fn test_dependency_parses(#[case] input: &str) {
     assert!(parses_successfully(input), "Failed to parse: {}", input);
 }
+
+// ============================================================================
+// `state` as a plain identifier (issue #18)
+// KerML spec §8.2.2.6: `state` is a contextual keyword, not reserved.
+// ============================================================================
+
+#[rstest]
+#[case("port def P { out item state : T; }")]
+#[case("item def WorldModelState; port def WorldModelStatePort { out item state : WorldModelState; }")]
+#[case("package TestState { item def WorldModelState; port def WorldModelStatePort { out item state : WorldModelState; } }")]
+#[case("part def P { attribute state : Boolean; }")]
+fn test_state_as_identifier_in_feature_decl(#[case] input: &str) {
+    assert!(parses_successfully(input), "`state` should be valid as an identifier: {}", input);
+}

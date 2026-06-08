@@ -2341,7 +2341,7 @@ mod tests {
             // membership, its sole member is the slot.
             assert_eq!(
                 wrap.owned_elements.as_slice(),
-                &[slot.id.clone()],
+                std::slice::from_ref(&slot.id),
                 "wrap.owned_elements for {slot_qname_prefix} must be exactly [slot]"
             );
 
